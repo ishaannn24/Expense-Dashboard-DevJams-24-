@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  background-color: rgb(11,11,11);
-  color: white;
+  background-color: #fff;
+  color: black;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -15,14 +15,24 @@ body a{
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1rem;
+  /* justify-content: space-between */
+  padding-right: 2rem;
+  padding-left: 2rem;
+  background-color: #000080;
+  
 
+}
+
+.logo-wrapper {
+  display: flex;
 }
 
 #logo-head{
   font-size: 3rem;
+  font-weight: 200;
+  color: white;
 }
+
 
 #payconnect{
   margin: 0;
@@ -81,8 +91,25 @@ body a{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: none;
   padding-bottom: 8rem;
+  transition: border-bottom 0.3s ease;
+  position: relative;
+}
+
+/* .hero.with-border{
+  border-bottom: 1px solid #d3d3d3;
+} */
+
+.hero.with-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px; 
+  width: 0; 
+  background-color: #000; 
+  animation: load-border 1s forwards; 
 }
 
 .hero-left h1{
@@ -93,8 +120,8 @@ body a{
 .hero-left h3{
   font-size: 3rem;
   margin: 0;
-  color: #d3d3d3;
-  font-weight: 400;
+  color: #000;
+  font-weight: 200;
   margin-top: 1rem;
 }
 
@@ -106,7 +133,15 @@ body a{
 /* glance */
 
 .glance-sec{
-  margin-top: 7rem;
+  margin-top: 8.5rem;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease, tranform 0.5s ease;
+}
+
+.glance-sec.visible{
+  opacity: 1;
+  transform: translateY(0);
 }
 
 #glance-head {
@@ -126,7 +161,7 @@ body a{
   font-size: 1.5rem;
 }
 th, td {
-  border: 1px solid white;
+  border: 1.2px solid #000;
   padding: 1rem;
   text-align: center;
 }
@@ -164,4 +199,15 @@ footer{
   justify-content: center;
   color: #d3d3d3;
   padding-top: 1rem;
+}
+
+/* animations and interactivity */
+
+@keyframes load-border {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }

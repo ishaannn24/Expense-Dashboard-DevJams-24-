@@ -13,13 +13,14 @@
 <body>
   <div class="navbar">
     <div class="logo-wrapper">
-      <h1 id="logo-head">Expense Dashboard</h1>
-    </div>
+      <span id="logo-head">X&nbsp;P&nbsp;E&nbsp;N&nbsp;S&nbsp;E&nbsp;</span>
+     </div>
     <div class="nav-options">
       <div class="options">
+        <a href="../landing page/index.html">Home</a>
         <a href="../expense page/index.html" target="_blank">Expenses</a>
-        <a href="#">Goals</a>
-        <a href="#" id="payconnect">PayConnect</a>
+        <a href="../goals page/index.html" target="_blank" style="margin-right: 0;">Goals</a>
+        
       </div>
       <div class="profile">
         <a href="#" id="profile"><i class="fa-solid fa-user"></i></a>
@@ -30,12 +31,57 @@
 
   <div class="main-content">
     <div class="connecting-wrapper">
-      <button class="connect-button">
+      <button class="connect-button btn btn-outline-dark">
         <i class="fa-solid fa-circle-plus"></i>
         Connect a payment mode
       </button>
     </div>
+    <div class="connect-history">
+      <div class="history history-1">
+        <div class="connect-category">
+          <h4>UPI</h4>
+        </div>
+        <div class="connect-cred">
+          <span>889188xxxx@oksbi</span>
+        </div>
+        <div class="connect-edit-del">
+          <i class="fa-solid fa-pen"></i>
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+
+      <div class="history history-2">
+        <div class="connect-category">
+          <h4>Credit Card</h4>
+        </div>
+        <div class="connect-cred">
+          <span>1234-5678-9123-XXX</span>
+        </div>
+        <div class="connect-edit-del">
+          <i class="fa-solid fa-pen"></i>
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+
+      <div class="history history-3">
+        <div class="connect-category">
+          <h4>Debit Card</h4>
+        </div>
+        <div class="connect-cred">
+          <span>1234-5678-9123-XXX</span>
+        </div>
+        <div class="connect-edit-del">
+          <i class="fa-solid fa-pen"></i>
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+      
+      
+
+    </div>
   </div>
 
+
+  <script src="app.js"></script>
 </body>
 </html>

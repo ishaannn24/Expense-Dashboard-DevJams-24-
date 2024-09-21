@@ -11,13 +11,13 @@
 <body>
   <div class="navbar">
     <div class="logo-wrapper">
-      <h1 id="logo-head">Expense Dashboard</h1>
-    </div>
+      <span id="logo-head">X&nbsp;P&nbsp;E&nbsp;N&nbsp;S&nbsp;E&nbsp;</span>
+     </div>
     <div class="nav-options">
       <div class="options">
         <a href="../landing page/index.html" target="_blank">Home</a>
         <a href="../expense page/index.html" target="_blank">Expenses</a>
-        <a href="#" id="payconnect">PayConnect</a>
+        <a href="../payconnect page/index.html" target="_blank" id="payconnect">PayConnect</a>
       </div>
       <div class="profile">
         <a href="#" id="profile"><i class="fa-solid fa-user"></i></a>
@@ -28,33 +28,46 @@
 
   <div class="main-content">
     <div class="main-head">
-      <h2>Set Your Limits</h2>
+      <h2>Set Your Monthly Limits</h2>
       <h5>You are in control of your money.</h5>
     </div>
 
-    <div class="range-toggle">
-      <i class="fa-solid fa-plus"></i>
-      <span>&#8377;10,000</span>
-      <i class="fa-solid fa-minus"></i>
+    <div class="content">
+      <div class="left">
+      <div class="upi inputs">
+        <span>UPI</span>
+        <input>
+      </div>
+
+      <div class="credit-card inputs">
+        <span>Credit Card</span>
+        <input>
+      </div>
+
+      <div class="debit-card inputs">
+        <span>Debit Card</span>
+        <input>
+      </div>
+
+      <div class="netbanking inputs">
+        <span>Net Banking</span>
+        <input>
+      </div>
+      <div class="submit-wrapper">
+        <button id="submit-btn" class="btn btn-primary">Submit</button>
+      </div>
     </div>
 
-    <div class="range-options">
-      <button class="btn btn-outline-light" id="credit-card">
-        Credit Card
-      </button>
-      <button class="btn btn-outline-light" id="upi">
-        UPI
-      </button>
-      <button class="btn btn-outline-light" id="overall">
-        Overall
-      </button>
-      <button class="btn btn-outline-light" id="debit-card">
-        Debit Card
-      </button>
-      <button class="btn btn-outline-light" id="net-banking">
-        Net Banking
-      </button>
+    <div class="right">
+      <span id="h1" class="right-head">Your Monthly</span>
+      <span id="h2" class="right-head">Limit is</span>
+      <span id="limit-disp">&#8377;500</span>
+      <span id="wise">spend wisely :&RightAngleBracket;</span>
+    </div>
     </div>
   </div>
+
+
+  <script src="app.js"></script>
 </body>
 </html>

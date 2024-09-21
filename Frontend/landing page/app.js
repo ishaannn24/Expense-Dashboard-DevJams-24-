@@ -144,3 +144,25 @@ window.onload = function() {
   calculateTotalAmount();
 };
 
+//glance-sec
+
+document.addEventListener("DOMContentLoaded", function () {
+  const glanceSection = document.querySelector(".glance-sec");
+  const heroSection = document.querySelector(".hero");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        glanceSection.classList.add("visible");
+        heroSection.classList.add("with-border");  
+        observer.unobserve(glanceSection);  
+      }
+    });
+  }, {
+    threshold: 0.1 
+  });
+
+  observer.observe(glanceSection);
+});
+
+

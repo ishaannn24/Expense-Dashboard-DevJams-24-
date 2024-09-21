@@ -11,13 +11,13 @@
 <body>
   <div class="navbar">
     <div class="logo-wrapper">
-      <h1 id="logo-head">Expense Dashboard</h1>
-    </div>
+      <span id="logo-head">X&nbsp;P&nbsp;E&nbsp;N&nbsp;S&nbsp;E&nbsp;</span>
+     </div>
     <div class="nav-options">
       <div class="options">
         <a href="../landing page/index.html" target="_blank">Home</a>
         <a href="../goals page/index.html" target="_blank">Goals</a>
-        <a href="#" id="payconnect">PayConnect</a>
+        <a href="../payconnect page/index.html" target="_blank" id="payconnect">PayConnect</a>
       </div>
         <div class="profile">
           <a href="#" id="profile"><i class="fa-solid fa-user"></i> </a>
@@ -34,15 +34,17 @@
         </div>
         <div class="c1-left-table">
           <table class="table-wrapper">
-            <caption><select class="statement-dropdown" style="width: 29%;">
-              <option>Monthly Statements</option>
+            <caption><select class="statement-dropdown" id="statementSelect">
               <option selected>Weekly Statements</option>
+
+              <option>Monthly Statements</option>
+              
               <option>Yearly Statements</option>
               
             </select></caption>
             <thead>
             <th>S.NO</th>
-            <th>Date</th>
+            <th id="header-date">Date</th>
             <th>Amount</th>
             <th>Category</th>
             <th>Payment Mode</th>
@@ -114,10 +116,10 @@
 
       <div class="c1-right">
         <div class="c1-right-1">
-          <select  class="statement-dropdown" id="chartTypeSelect">
+          <select  class="statement-dropdown" id="doughnutSelect">
             <!-- <option selected>Category Spend</option> -->
-            <option selected>Payment Mode</option>
-            <option>Category</option>
+            <option selected value="Payment Mode">Payment Mode</option>
+            <option value="Category">Category</option>
             
           </select>
           <canvas id="paymentDoughnutChart"></canvas>
@@ -125,13 +127,6 @@
         </div>
 
         <div class="c1-right-2">
-          <select style="width: 16%;" class="statement-dropdown">
-            <option selected>Weekly Spend</option>
-            <!-- <option>Daily Spend</option> -->
-            <option>Monthly Spend</option>
-            <option>Yearly Spend</option>
-          </select>
-          
           <canvas id="expenseLineChart" width="100" height="50" style="margin-left: 20px;"></canvas>
         </div>
       </div>
@@ -144,9 +139,9 @@
         
   </div>
 
-  <footer>
+  <!-- <footer>
     <h4 style="font-size: 1rem;">&copy; 2024 Expense DB</h4>
-  </footer>
+  </footer> -->
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js"></script>
