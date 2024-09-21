@@ -1,27 +1,11 @@
-// Initial limit set to 10,000
-let currentLimit = 0;
-let selectedCategory = 'Overall'; 
+document.getElementById('submit-btn').addEventListener('click', function() {
+  const upi = parseFloat(document.querySelector('.upi input').value) || 0;
+  const creditCard = parseFloat(document.querySelector('.credit-card input').value) || 0;
+  const debitCard = parseFloat(document.querySelector('.debit-card input').value) || 0;
+  const netBanking = parseFloat(document.querySelector('.netbanking input').value) || 0;
 
+  const total = upi + creditCard + debitCard + netBanking;
 
-function updateLimit(increment) {
-  currentLimit += increment ? 100 : -100;
-  if (currentLimit < 0) currentLimit = 0; 
-  document.querySelector('.range-toggle span').textContent = `₹${currentLimit}`;
-}
-
-
-function selectCategory(category) {
-  selectedCategory = category;
-  document.querySelector('.selected-category').textContent = `${selectedCategory} limit: ₹${currentLimit}`;
-}
-
-
-document.querySelector('.fa-plus').addEventListener('click', () => updateLimit(true));
-document.querySelector('.fa-minus').addEventListener('click', () => updateLimit(false));
-
-
-document.getElementById('credit-card').addEventListener('click', () => selectCategory('Credit Card'));
-document.getElementById('upi').addEventListener('click', () => selectCategory('UPI'));
-document.getElementById('overall').addEventListener('click', () => selectCategory('Overall'));
-document.getElementById('debit-card').addEventListener('click', () => selectCategory('Debit Card'));
-document.getElementById('net-banking').addEventListener('click', () => selectCategory('Net Banking'));
+  const limitDisplay = document.getElementById('limit-disp');
+  limitDisplay.innerHTML = `&#8377;${total.toFixed(2)}`;
+});
