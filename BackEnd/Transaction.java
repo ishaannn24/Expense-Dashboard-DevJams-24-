@@ -1,14 +1,8 @@
 package com.example.moneymanagement.model;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Transaction {
@@ -17,32 +11,34 @@ public class Transaction {
     private Long id;
 
     private BigDecimal amount;
-    private LocalDateTime dateofpayment; // Date of the transaction
-    private String category;  // Description of the transaction
-    private String modeofpayment;//The mode in which we pay
+    private LocalDateTime dateofpayment;
+    private String category;
+    private String modeofpayment;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user; // Reference to the user
+    private User user;
 
     // Constructors
     public Transaction() {}
 
-    public Transaction(BigDecimal amount, LocalDateTime dateofpayment, String category, User user,String modeofpayment) {
+    public Transaction(BigDecimal amount, LocalDateTime dateofpayment, String category, User user, String modeofpayment) {
         this.amount = amount;
         this.dateofpayment = dateofpayment;
         this.category = category;
         this.user = user;
-        this.modeofpayment=modeofpayment;
+        this.modeofpayment = modeofpayment;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {---->No need of these getters and setters as we are not really using id we are using 
+                                //password
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public BigDecimal getAmount() {
         return amount;
@@ -52,20 +48,28 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDateTime getDateofpayment() {
         return dateofpayment;
     }
 
-    public void setDate(LocalDateTime dateofpayment) {
-        this.dateofpayment = dateofpayment; // Setter for date
+    public void setDateofpayment(LocalDateTime dateofpayment) {
+        this.dateofpayment = dateofpayment;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setDescription(String category) {
-        this.category = category; // Setter for description
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getModeofpayment() {
+        return modeofpayment;
+    }
+
+    public void setModeofpayment(String modeofpayment) {
+        this.modeofpayment = modeofpayment;
     }
 
     public User getUser() {
@@ -73,12 +77,6 @@ public class Transaction {
     }
 
     public void setUser(User user) {
-        this.user = user; // Setter for user
-    }
-    public void setmodeofpayment(String modeofpayment) {
-    	this.modeofpayment=modeofpayment;
-    }
-    public String getmodeofpayment() {
-    	return modeofpayment;
+        this.user = user;
     }
 }
