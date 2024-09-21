@@ -19,18 +19,80 @@ public class TransactionService {
     @Autowired
     private UserRepository userRepository;
 
-    public Transaction addTransaction(String email, BigDecimal amount, String description) {
-        User user = userRepository.findByEmail(email)  // Updated to find user by email
+    // Method to create a new transaction for a user
+    public Transaction createTransaction(String email, BigDecimal amount, String category, String modeOfPayment) {
+        User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Transaction transaction = new Transaction();
-        transaction.setAmount(amount);
-        transaction.setDate(LocalDateTime.now());
-        transaction.setDescription(description);
-        transaction.setUser(user); // Associate transaction with user
+        LocalDateTime dateOfPayment = LocalDateTime.now(); // Set current date and time
 
-        return transactionRepository.save(transaction); // Save to the database
+        Transaction transaction = new Transaction(amount, dateOfPayment, category, user, modeOfPayment);
+        return transactionRepository.save(transaction);
     }
 
-    // Additional methods for retrieving, updating, and deleting transactions can be added here
+    // Method to get the total spent by a user on a specific mode of payment
+    public BigDecimal getTotalSpentByUserAndMode(String email, String modeOfPayment) {
+        return transactionRepository.calculateTotalSpentByUserAndMode(email, modeOfPayment);
+    }
+
+    // Updated method to update user budget after a transaction based on the mode of payment
+    public void updateUserBudget(String email, BigDecimal amount, String modeOfPayment) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        BigDecimal newOverallBudget = user.getOverallBudget().subtract(amount);
+
+        switch (modeOfPayment) {
+            case "UPI":
+                BigDecimal newUpiBudget = user.getUpiBudget().subtract(amount);
+                if (newUpiBudget.compareTo(BigDecimal.ZERO) < 0 ) {
+                    throw new RuntimeException("UPI monthly limit  exceeded,Try spending carefuuly next time");
+                }
+                if(newOverallBudget.compareTo(BigDecimal.ZERO) < 0) {
+                	throw new RuntimeException("Total Monthly limit exceeded,Try spending more carefully next time");
+                }
+                user.setUpiBudget(newUpiBudget);
+                break;
+
+            case "Credit Card":
+                BigDecimal newCreditCardBudget = user.getCreditCardBudget().subtract(amount);
+                if (newCreditCardBudget.compareTo(BigDecimal.ZERO) < 0 ) {
+                    throw new RuntimeException("Credit Card monthly limit  exceeded,Try spending carefuuly next time");
+                }
+                if(newOverallBudget.compareTo(BigDecimal.ZERO) < 0) {
+                	throw new RuntimeException("Total Monthly limit exceeded,Try spending more carefully next time");
+                }
+                user.setCreditCardBudget(newCreditCardBudget);
+                break;
+
+            case "Debit Card":
+                BigDecimal newDebitCardBudget = user.getDebitCardBudget().subtract(amount);
+                if (newDebitCardBudget.compareTo(BigDecimal.ZERO) < 0 ) {
+                    throw new RuntimeException("Debit Card monthly limit  exceeded,Try spending carefuuly next time");
+                }
+                if(newOverallBudget.compareTo(BigDecimal.ZERO) < 0) {
+                	throw new RuntimeException("Total Monthly limit exceeded,Try spending more carefully next time");
+                }
+                user.setDebitCardBudget(newDebitCardBudget);
+                break;
+
+            case "NetBanking":
+                BigDecimal newNetBankingBudget = user.getNetBankingBudget().subtract(amount);
+                if (newNetBankingBudget.compareTo(BigDecimal.ZERO) < 0 ) {
+                    throw new RuntimeException("Net Banking monthly limit  exceeded,Try spending carefuuly next time");
+                }
+                if(newOverallBudget.compareTo(BigDecimal.ZERO) < 0) {
+                	throw new RuntimeException("Total Monthly limit exceeded,Try spending more carefully next time");
+                }
+                user.setNetBankingBudget(newNetBankingBudget);
+                break;
+
+            default:
+                throw new RuntimeException("Invalid payment mode");
+        }
+
+        // Finally, update the overall budget after updating the individual budget
+        user.setOverallBudget(newOverallBudget);
+        userRepository.save(user);
+    }
 }
