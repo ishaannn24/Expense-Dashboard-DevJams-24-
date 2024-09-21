@@ -1,12 +1,9 @@
 package com.example.moneymanagement.repository;
 
 import com.example.moneymanagement.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
+import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email); // Updated to find user by email
+public interface UserRepository extends CrudRepository<User, String> {
+    Optional<User> findByEmail(String email);
 }
