@@ -18,11 +18,20 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<Transaction> addTransaction(
-            @RequestParam Long userId,
+            @RequestParam String email,
             @RequestParam BigDecimal amount,
-            @RequestParam String description) {
-        Transaction newTransaction = transactionService.addTransaction(userId, amount, description);
+            @RequestParam String category,
+            @RequestParam String modeOfPayment) {
+        Transaction newTransaction = transactionService.createTransaction(email, amount, category, modeOfPayment);
         return ResponseEntity.status(HttpStatus.CREATED).body(newTransaction);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<BigDecimal> getTotalSpent(
+            @RequestParam String email,
+            @RequestParam String modeOfPayment) {
+        BigDecimal totalSpent = transactionService.getTotalSpentByUserAndMode(email, modeOfPayment);
+        return ResponseEntity.ok(totalSpent);
     }
 
     // Additional methods for getting, updating, and deleting transactions can be added here
